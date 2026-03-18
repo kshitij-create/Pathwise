@@ -5,7 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import type { LearningPath, Lesson } from "@/lib/learningPath/types";
 import { generateMockLearningPath } from "@/lib/learningPath/mock";
 import { saveActivePath, upsertSavedPath } from "@/lib/learningPath/storage";
-import { generatePath, updateProgress, savePath } from "@/lib/learningPath/api";
+import { generatePath, updateProgress, savePath, fetchUserPaths } from "@/lib/learningPath/api";
 
 function percentComplete(path: LearningPath) {
   const all = path.modules.flatMap((m) => m.lessons);
@@ -181,6 +181,11 @@ export function LearningPathApp({
   const [path, setPath] = useState<LearningPath>(
     () => initialPath ?? generateMockLearningPath("Learn React")
   );
+
+  // Sync with initialPath if it changes (prevents hydration mismatch if handled by parent)
+  useEffect(() => {
+    if (initialPath) setPath(initialPath);
+  }, [initialPath]);
 
   const [activeLessonId, setActiveLessonId] = useState<string | null>(null);
 

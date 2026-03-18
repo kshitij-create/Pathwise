@@ -25,11 +25,11 @@ export function AppEntry() {
         if (saved.length > 0) {
           setOnboardedState(true);
           // Set the first one as active if none in localStorage
-          const local = loadActivePath();
+          const local = typeof window !== "undefined" ? loadActivePath() : null;
           setActive(local ?? saved[0].data);
         } else {
-          setOnboardedState(hasOnboarded());
-          setActive(loadActivePath());
+          setOnboardedState(typeof window !== "undefined" ? hasOnboarded() : false);
+          setActive(typeof window !== "undefined" ? loadActivePath() : null);
         }
       } catch (err) {
         console.error("Failed to fetch paths:", err);
