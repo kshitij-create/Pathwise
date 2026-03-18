@@ -47,7 +47,7 @@ export function AppEntry() {
     init();
   }, []);
 
-  if (!ready) {
+  if (!ready || !mounted) {
     return (
       <main className="max-w-[1600px] mx-auto pt-20 pb-16 px-4 sm:px-6">
         <div className="glass-panel rounded-2xl p-8 border border-white/10">

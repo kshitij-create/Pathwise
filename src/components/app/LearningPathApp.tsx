@@ -264,6 +264,14 @@ export function LearningPathApp({
     }
   }
 
+  if (!mounted) {
+    return (
+      <div className="flex-1 bg-[#0a0a0a] min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-[1600px] mx-auto pt-20 pb-16 px-4 sm:px-6 grid grid-cols-1 xl:grid-cols-12 gap-8">
       <div className="xl:col-span-8 flex flex-col gap-8">
