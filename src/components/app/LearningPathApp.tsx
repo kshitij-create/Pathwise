@@ -198,8 +198,10 @@ export function LearningPathApp({
 
   useEffect(() => {
     // choose first non-completed lesson as active by default
-    const first = path.modules.flatMap((m) => m.lessons).find((l) => !l.completed);
-    setActiveLessonId(first?.id ?? path.modules.flatMap((m) => m.lessons)[0]?.id ?? null);
+    if (!path?.modules) return;
+    const allLessons = path.modules.flatMap((m) => m.lessons || []);
+    const first = allLessons.find((l) => l && !l.completed);
+    setActiveLessonId(first?.id ?? allLessons[0]?.id ?? null);
   }, [path.id]);
 
   useEffect(() => {
