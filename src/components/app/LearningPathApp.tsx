@@ -8,13 +8,15 @@ import { saveActivePath, upsertSavedPath } from "@/lib/learningPath/storage";
 import { generatePath, updateProgress, savePath, fetchUserPaths } from "@/lib/learningPath/api";
 
 function percentComplete(path: LearningPath) {
-  const all = path.modules.flatMap((m) => m.lessons);
+  if (!path?.modules) return 0;
+  const all = path.modules.flatMap((m) => m.lessons || []);
   const completed = all.filter((l) => l.completed).length;
   return all.length === 0 ? 0 : Math.round((completed / all.length) * 100);
 }
 
 function summaryCounts(path: LearningPath) {
-  const videos = path.modules.reduce((acc, m) => acc + m.lessons.length, 0);
+  if (!path?.modules) return { modules: 0, videos: 0 };
+  const videos = path.modules.reduce((acc, m) => acc + (m.lessons?.length || 0), 0);
   return { modules: path.modules.length, videos };
 }
 
@@ -178,9 +180,14 @@ export function LearningPathApp({
 }>) {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [path, setPath] = useState<LearningPath>(
     () => initialPath ?? generateMockLearningPath("Learn React")
   );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Sync with initialPath if it changes (prevents hydration mismatch if handled by parent)
   useEffect(() => {

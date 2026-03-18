@@ -15,8 +15,13 @@ import { fetchUserPaths } from "@/lib/learningPath/api";
 
 export function AppEntry() {
   const [ready, setReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [onboarded, setOnboardedState] = useState(false);
   const [active, setActive] = useState<LearningPath | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     async function init() {
