@@ -5,6 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import type { LearningPath, Lesson } from "@/lib/learningPath/types";
 import { generateMockLearningPath } from "@/lib/learningPath/mock";
 import { saveActivePath, upsertSavedPath } from "@/lib/learningPath/storage";
+import { generatePath, updateProgress, savePath } from "@/lib/learningPath/api";
 
 function percentComplete(path: LearningPath) {
   const all = path.modules.flatMap((m) => m.lessons);
@@ -176,6 +177,7 @@ export function LearningPathApp({
   initialPath?: LearningPath;
 }>) {
   const [topic, setTopic] = useState("");
+  const [loading, setLoading] = useState(false);
   const [path, setPath] = useState<LearningPath>(
     () => initialPath ?? generateMockLearningPath("Learn React")
   );
@@ -197,7 +199,10 @@ export function LearningPathApp({
   const stats = useMemo(() => summaryCounts(path), [path]);
   const progress = useMemo(() => percentComplete(path), [path]);
 
-  function toggleLessonCompleted(lessonId: string) {
+  async function toggleLessonCompleted(lessonId: string) {
+    const isCompleted = path.modules.flatMap(m => m.lessons).find(l => l.id === lessonId)?.completed;
+    
+    // Optimistic update
     setPath((prev) => ({
       ...prev,
       lastActiveIso: new Date().toISOString(),
@@ -208,18 +213,43 @@ export function LearningPathApp({
         ),
       })),
     }));
+
+    try {
+      if (path.id) {
+        await updateProgress(path.id, lessonId, !isCompleted);
+      }
+    } catch (err) {
+      console.error("Failed to update progress:", err);
+      // Revert if failed? (optional for now)
+    }
   }
 
-  function handleGenerate() {
-    const next = generateMockLearningPath(topic);
-    setPath(next);
-    setTopic("");
-    saveActivePath(next);
+  async function handleGenerate() {
+    if (!topic.trim()) return;
+    setLoading(true);
+    try {
+      const next = await generatePath(topic);
+      setPath(next);
+      setTopic("");
+      saveActivePath(next);
+      // Automatically save to DB
+      await savePath(topic, next);
+    } catch (err) {
+      alert("Failed to generate path. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function handleSave() {
-    upsertSavedPath(path);
-    saveActivePath(path);
+  async function handleSave() {
+    try {
+      await savePath(path.topic, path);
+      upsertSavedPath(path);
+      saveActivePath(path);
+      alert("Path saved successfully!");
+    } catch (err) {
+      alert("Failed to save path.");
+    }
   }
 
   return (
@@ -244,10 +274,11 @@ export function LearningPathApp({
             <button
               type="button"
               onClick={handleGenerate}
-              className="bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg hover:bg-neutral-200 transition-colors flex items-center gap-1.5 shadow-sm"
+              disabled={loading}
+              className="bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg hover:bg-neutral-200 disabled:opacity-50 transition-colors flex items-center gap-1.5 shadow-sm"
             >
-              Generate Path
-              <Icon icon="solar:arrow-right-linear" />
+              {loading ? "Generating..." : "Generate Path"}
+              <Icon icon={loading ? "solar:refresh-linear" : "solar:arrow-right-linear"} className={loading ? "animate-spin" : ""} />
             </button>
           </div>
         </div>
@@ -373,9 +404,9 @@ function SavedPathsWidget() {
   const [paths, setPaths] = useState<LearningPath[]>([]);
 
   useEffect(() => {
-    import("@/lib/learningPath/storage").then(({ loadSavedPaths }) => {
-      setPaths(loadSavedPaths());
-    });
+    fetchUserPaths().then((saved) => {
+      setPaths(saved.map((s) => s.data));
+    }).catch(err => console.error("Failed to fetch saved paths:", err));
   }, []);
 
   return (

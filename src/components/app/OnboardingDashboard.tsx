@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import type { LearningPath } from "@/lib/learningPath/types";
-import { generateMockLearningPath } from "@/lib/learningPath/mock";
+import { generatePath } from "@/lib/learningPath/api";
 
 function TopicChip({
   label,
@@ -73,6 +73,7 @@ export function OnboardingDashboard({
   onGenerateFirstPath,
 }: Readonly<{ onGenerateFirstPath: (path: LearningPath) => void }>) {
   const [topic, setTopic] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const suggestions = useMemo(
     () => [
@@ -97,9 +98,17 @@ export function OnboardingDashboard({
     []
   );
 
-  function generate(topicText: string) {
-    const path = generateMockLearningPath(topicText);
-    onGenerateFirstPath(path);
+  async function generate(topicText: string) {
+    if (!topicText.trim()) return;
+    setLoading(true);
+    try {
+      const path = await generatePath(topicText);
+      onGenerateFirstPath(path);
+    } catch (err) {
+      alert("Failed to generate path. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -174,10 +183,14 @@ export function OnboardingDashboard({
               <button
                 type="button"
                 onClick={() => generate(topic)}
-                className="bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg hover:bg-neutral-200 transition-colors flex items-center gap-1.5 shadow-sm"
+                disabled={loading}
+                className="bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg hover:bg-neutral-200 disabled:opacity-50 transition-colors flex items-center gap-1.5 shadow-sm"
               >
-                Generate Path
-                <Icon icon="solar:arrow-right-linear" />
+                {loading ? "Generating..." : "Generate Path"}
+                <Icon
+                  icon={loading ? "solar:refresh-linear" : "solar:arrow-right-linear"}
+                  className={loading ? "animate-spin" : ""}
+                />
               </button>
             </div>
           </div>
@@ -439,17 +452,21 @@ export function OnboardingDashboard({
           learning immediately.
         </p>
         <div className="mt-6">
-          <button
-            type="button"
-            onClick={() => generate(topic)}
-            className="shiny-cta group overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] rounded-full relative shadow-2xl"
-          >
-            <div className="shiny-cta-bg absolute inset-0 rounded-full" />
-            <div className="relative z-10 px-8 py-3.5 flex items-center gap-2 text-sm font-semibold text-white bg-[#0a0a0a] m-[1px] rounded-full hover:bg-[#111] transition-colors">
-              <Icon icon="solar:magic-stick-3-linear" className="text-lg text-green-400" />
-              Generate your first path
-            </div>
-          </button>
+            <button
+              type="button"
+              onClick={() => generate(topic)}
+              disabled={loading}
+              className="shiny-cta group overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] rounded-full relative shadow-2xl disabled:opacity-50"
+            >
+              <div className="shiny-cta-bg absolute inset-0 rounded-full" />
+              <div className="relative z-10 px-8 py-3.5 flex items-center gap-2 text-sm font-semibold text-white bg-[#0a0a0a] m-[1px] rounded-full hover:bg-[#111] transition-colors">
+                <Icon
+                  icon={loading ? "solar:refresh-linear" : "solar:magic-stick-3-linear"}
+                  className={`text-lg text-green-400 ${loading ? "animate-spin" : ""}`}
+                />
+                {loading ? "Generating path..." : "Generate your first path"}
+              </div>
+            </button>
         </div>
       </section>
     </main>

@@ -11,6 +11,7 @@ import {
 } from "@/lib/learningPath/storage";
 import { OnboardingDashboard } from "@/components/app/OnboardingDashboard";
 import { LearningPathApp } from "@/components/app/LearningPathApp";
+import { fetchUserPaths } from "@/lib/learningPath/api";
 
 export function AppEntry() {
   const [ready, setReady] = useState(false);
@@ -18,10 +19,27 @@ export function AppEntry() {
   const [active, setActive] = useState<LearningPath | null>(null);
 
   useEffect(() => {
-    const a = loadActivePath();
-    setActive(a);
-    setOnboardedState(hasOnboarded());
-    setReady(true);
+    async function init() {
+      try {
+        const saved = await fetchUserPaths();
+        if (saved.length > 0) {
+          setOnboardedState(true);
+          // Set the first one as active if none in localStorage
+          const local = loadActivePath();
+          setActive(local ?? saved[0].data);
+        } else {
+          setOnboardedState(hasOnboarded());
+          setActive(loadActivePath());
+        }
+      } catch (err) {
+        console.error("Failed to fetch paths:", err);
+        setOnboardedState(hasOnboarded());
+        setActive(loadActivePath());
+      } finally {
+        setReady(true);
+      }
+    }
+    init();
   }, []);
 
   if (!ready) {
