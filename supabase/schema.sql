@@ -11,11 +11,13 @@ create table if not exists public.profiles (
 alter table public.profiles enable row level security;
 
 -- Users can read/update their own profile.
+drop policy if exists "profiles_select_own" on public.profiles;
 create policy "profiles_select_own"
 on public.profiles
 for select
 using (auth.uid() = id);
 
+drop policy if exists "profiles_update_own" on public.profiles;
 create policy "profiles_update_own"
 on public.profiles
 for update
@@ -57,18 +59,22 @@ create table if not exists public.learning_paths (
 
 alter table public.learning_paths enable row level security;
 
+drop policy if exists "learning_paths_select_own" on public.learning_paths;
 create policy "learning_paths_select_own"
 on public.learning_paths for select
 using (auth.uid() = user_id);
 
+drop policy if exists "learning_paths_insert_own" on public.learning_paths;
 create policy "learning_paths_insert_own"
 on public.learning_paths for insert
 with check (auth.uid() = user_id);
 
+drop policy if exists "learning_paths_update_own" on public.learning_paths;
 create policy "learning_paths_update_own"
 on public.learning_paths for update
 using (auth.uid() = user_id);
 
+drop policy if exists "learning_paths_delete_own" on public.learning_paths;
 create policy "learning_paths_delete_own"
 on public.learning_paths for delete
 using (auth.uid() = user_id);
@@ -86,14 +92,17 @@ create table if not exists public.lesson_progress (
 
 alter table public.lesson_progress enable row level security;
 
+drop policy if exists "lesson_progress_select_own" on public.lesson_progress;
 create policy "lesson_progress_select_own"
 on public.lesson_progress for select
 using (auth.uid() = user_id);
 
+drop policy if exists "lesson_progress_upsert_own" on public.lesson_progress;
 create policy "lesson_progress_upsert_own"
 on public.lesson_progress for insert
 with check (auth.uid() = user_id);
 
+drop policy if exists "lesson_progress_update_own" on public.lesson_progress;
 create policy "lesson_progress_update_own"
 on public.lesson_progress for update
 using (auth.uid() = user_id);
