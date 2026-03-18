@@ -1,0 +1,380 @@
+<html lang="en" class="dark scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Pathwise</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+--font-sans: 'Inter', sans-serif;
+--font-display: 'Space Grotesk', sans-serif;
+--font-serif: 'Instrument Serif', serif;
+}
+body {
+font-family: var(--font-sans);
+background-color: #050505;
+color: #ffffff;
+overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6, .font-display {
+font-family: var(--font-display);
+}
+.font-serif {
+font-family: var(--font-serif);
+}
+/* Border Utility */
+.glass-panel {
+background: rgba(10, 10, 10, 0.6);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255,255,255,0.08);
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+/* Hide scrollbar for horizontal lists */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+<meta name="disabled-font-classes" content="font-roboto,font-montserrat,font-poppins,font-playfair,font-instrument-serif,font-merriweather,font-bricolage,font-jakarta,font-manrope,font-space-grotesk,font-work-sans,font-pt-serif,font-geist-mono,font-space-mono,font-quicksand,font-nunito,font-newsreader,font-google-sans-flex,font-oswald,font-dm-sans"><link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">
+.font-geist { font-family: 'Geist', sans-serif !important; }
+</style></head>
+  <body class="antialiased selection:bg-green-500/30 selection:text-green-200">
+
+<!-- Background (component) added by Aura -->
+<div class="aura-background-component fixed top-0 w-full h-screen -z-10 opacity-30 brightness-75 pointer-events-none" data-alpha-mask="80" style="; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"><div class="aura-background-component top-0 w-full -z-10 absolute h-full">
+  <div data-us-project="inzENTvhzS9plyop7Z6g" class="absolute w-full h-full left-0 top-0 -z-10"></div>
+  <script type="text/javascript">
+    !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+  </script>
+</div></div>
+
+    <!-- Application Top Navigation -->
+    <nav class="fixed z-50 bg-[#050505]/80 w-full border-white/5 border-b top-0 backdrop-blur-md">
+      <div class="flex h-14 max-w-[1600px] mx-auto px-4 sm:px-6 items-center justify-between">
+        <!-- Brand & Main Links -->
+        <div class="flex items-center gap-8">
+          <a href="#" class="flex items-center gap-2 group">
+            <span class="text-lg font-display font-semibold tracking-tight text-white flex items-center gap-2">
+              <iconify-icon icon="solar:route-bold-duotone" class="text-green-400 text-xl"></iconify-icon>
+              PATHWISE
+            </span>
+          </a>
+          <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+            <a href="#" class="px-3 py-1.5 text-white bg-white/10 rounded-md transition-colors">Dashboard</a>
+            <a href="#" class="px-3 py-1.5 text-neutral-400 hover:text-white hover:bg-white/5 rounded-md transition-colors">My Paths</a>
+            <a href="#" class="px-3 py-1.5 text-neutral-400 hover:text-white hover:bg-white/5 rounded-md transition-colors">Explore</a>
+          </div>
+        </div>
+
+        <!-- User Area -->
+        <div class="flex items-center gap-4">
+          <button class="text-neutral-400 hover:text-white transition-colors relative p-1">
+            <iconify-icon icon="solar:bell-linear" class="text-xl"></iconify-icon>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full border border-[#050505]"></span>
+          </button>
+          <div class="w-px h-4 bg-white/10 mx-1"></div>
+          <button class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-green-500 to-blue-500 flex items-center justify-center text-xs font-semibold text-white shadow-inner">
+              J
+            </div>
+            <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 text-sm"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Application Area -->
+    <main class="max-w-[1600px] mx-auto pt-20 pb-16 px-4 sm:px-6 grid grid-cols-1 xl:grid-cols-12 gap-8">
+      
+      <!-- Left / Main Column (Generator & Active Path) -->
+      <div class="xl:col-span-8 flex flex-col gap-8">
+        
+        <!-- Top Area: Topic Generator Input -->
+        <div class="relative w-full z-20 group">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <iconify-icon icon="solar:magic-stick-3-linear" class="text-neutral-400 text-xl group-focus-within:text-green-400 transition-colors"></iconify-icon>
+          </div>
+          <input type="text" class="w-full bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl py-4 pl-12 pr-32 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all shadow-lg" placeholder="What do you want to learn? (e.g., Learn React, Learn Spanish)">
+          <div class="absolute inset-y-2 right-2 flex items-center">
+            <button class="bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg hover:bg-neutral-200 transition-colors flex items-center gap-1.5 shadow-sm">
+              Generate Path
+              <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Learning Path View -->
+        <div class="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+          <!-- Background Glow -->
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-green-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+          <!-- Path Header -->
+          <div class="mb-8 relative z-10">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded text-[10px] font-semibold tracking-wide uppercase">Active Path</span>
+              <span class="text-xs text-neutral-500 font-medium">Last active 2 hours ago</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-white mb-4">Mastering React &amp; Modern Web Dev</h1>
+            
+            <!-- Path Stats -->
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-neutral-400 mb-8 border-b border-white/5 pb-8">
+              <span class="flex items-center gap-2"><iconify-icon icon="solar:clock-circle-linear" class="text-lg"></iconify-icon> 42h 15m total</span>
+              <span class="flex items-center gap-2"><iconify-icon icon="solar:folder-linear" class="text-lg"></iconify-icon> 8 Modules</span>
+              <span class="flex items-center gap-2"><iconify-icon icon="solar:video-library-linear" class="text-lg"></iconify-icon> 64 Videos</span>
+            </div>
+
+            <!-- Global Progress Bar -->
+            <div class="space-y-2.5">
+              <div class="flex justify-between items-end text-sm">
+                <span class="font-medium text-white">Course Progress</span>
+                <span class="text-green-400 font-semibold tracking-tight">32%</span>
+              </div>
+              <div class="h-2 w-full bg-black/50 border border-white/5 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-green-500 to-emerald-400 w-[32%] rounded-full relative">
+                  <div class="absolute top-0 right-0 bottom-0 left-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPjwvc3ZnPg==')] opacity-50"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Curriculum Modules List -->
+          <div class="space-y-6 relative z-10">
+            
+            <!-- Module 1: Completed -->
+            <div class="border border-white/5 rounded-xl bg-black/20 overflow-hidden">
+              <div class="p-4 sm:p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                <div>
+                  <h3 class="font-medium text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs border border-green-500/30">
+                      <iconify-icon icon="solar:check-read-linear"></iconify-icon>
+                    </span>
+                    Module 1: React Fundamentals
+                  </h3>
+                  <p class="text-xs text-neutral-500 mt-1 ml-8">Components, JSX, Props, and State basics.</p>
+                </div>
+                <span class="text-xs font-medium text-neutral-500 hidden sm:block">4/4 Completed</span>
+              </div>
+              
+              <!-- Module 1 Videos -->
+              <div class="flex flex-col">
+                <!-- Video Item (Completed) -->
+                <div class="group flex items-center gap-4 p-3 mx-2 my-1 rounded-lg hover:bg-white/[0.02] transition-colors cursor-pointer">
+                  <button class="flex-shrink-0 w-5 h-5 rounded-full border border-green-500/50 bg-green-500/10 flex items-center justify-center text-green-400 ml-1">
+                    <iconify-icon icon="solar:check-read-linear" class="text-[10px]"></iconify-icon>
+                  </button>
+                  <div class="w-24 h-14 bg-neutral-800 rounded-md overflow-hidden relative flex-shrink-0 border border-white/5">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=200&amp;q=80" class="w-full h-full object-cover opacity-50" alt="thumbnail">
+                    <div class="absolute bottom-1 right-1 bg-black/80 text-[9px] font-medium px-1 rounded text-neutral-300">18:24</div>
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <h4 class="text-sm font-medium text-neutral-300 truncate group-hover:text-white transition-colors line-through decoration-neutral-600">React Crash Course for Beginners</h4>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-[11px] text-neutral-500 truncate">Programming with Mosh</span>
+                      <span class="w-1 h-1 rounded-full bg-neutral-700 hidden sm:block"></span>
+                      <span class="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-white/5 text-neutral-400 border border-white/5 uppercase tracking-wider hidden sm:block">Beginner</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module 2: In Progress -->
+            <div class="border border-white/10 rounded-xl bg-black/40 overflow-hidden shadow-lg ring-1 ring-white/5">
+              <div class="p-4 sm:p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.04]">
+                <div>
+                  <h3 class="font-medium text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-[#0a0a0a] text-white flex items-center justify-center text-xs border border-white/20">2</span>
+                    Module 2: Advanced State &amp; Hooks
+                  </h3>
+                  <p class="text-xs text-neutral-500 mt-1 ml-8">useEffect, Custom Hooks, Context API, and Reducers.</p>
+                </div>
+                <span class="text-xs font-medium text-green-400 hidden sm:block">1/5 Completed</span>
+              </div>
+              
+              <!-- Module 2 Videos -->
+              <div class="flex flex-col py-2">
+                
+                <!-- Video Item (Completed) -->
+                <div class="group flex items-center gap-4 p-3 mx-2 rounded-lg hover:bg-white/[0.02] transition-colors cursor-pointer">
+                  <button class="flex-shrink-0 w-5 h-5 rounded-full border border-green-500/50 bg-green-500/10 flex items-center justify-center text-green-400 ml-1">
+                    <iconify-icon icon="solar:check-read-linear" class="text-[10px]"></iconify-icon>
+                  </button>
+                  <div class="w-24 h-14 bg-neutral-800 rounded-md overflow-hidden relative flex-shrink-0 border border-white/5">
+                    <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=200&amp;q=80" class="w-full h-full object-cover opacity-50" alt="thumbnail">
+                    <div class="absolute bottom-1 right-1 bg-black/80 text-[9px] font-medium px-1 rounded text-neutral-300">24:10</div>
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <h4 class="text-sm font-medium text-neutral-300 truncate group-hover:text-white transition-colors line-through decoration-neutral-600">Mastering useEffect once and for all</h4>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-[11px] text-neutral-500 truncate">Web Dev Simplified</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Video Item (Up Next / Active) -->
+                <div class="group flex items-center gap-4 p-3 mx-2 rounded-lg bg-white/[0.05] border border-white/5 transition-colors cursor-pointer relative overflow-hidden">
+                  <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-green-500"></div>
+                  <button class="flex-shrink-0 w-5 h-5 rounded-full border border-neutral-600 hover:border-green-500 bg-black/50 flex items-center justify-center text-transparent hover:text-green-500 transition-colors ml-1">
+                    <iconify-icon icon="solar:check-read-linear" class="text-[10px]"></iconify-icon>
+                  </button>
+                  <div class="w-24 h-14 bg-neutral-800 rounded-md overflow-hidden relative flex-shrink-0 border border-white/10 group-hover:border-white/20 transition-colors">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" alt="thumbnail">
+                    <div class="absolute bottom-1 right-1 bg-black/90 text-[9px] font-medium px-1 rounded text-white shadow-sm">45:30</div>
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <h4 class="text-sm font-semibold text-white truncate group-hover:text-green-400 transition-colors">Build a Custom Hook - Step by Step</h4>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-[11px] text-neutral-400 truncate">Fireship</span>
+                      <span class="w-1 h-1 rounded-full bg-neutral-700 hidden sm:block"></span>
+                      <span class="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider hidden sm:block">Intermediate</span>
+                    </div>
+                  </div>
+                  <button class="hidden sm:flex flex-shrink-0 items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-black bg-white rounded-md hover:bg-neutral-200 transition-colors shadow-sm">
+                    <iconify-icon icon="solar:play-bold" class="text-[10px]"></iconify-icon> Watch
+                  </button>
+                </div>
+
+                <!-- Video Item (Locked / Queue) -->
+                <div class="group flex items-center gap-4 p-3 mx-2 rounded-lg hover:bg-white/[0.02] transition-colors cursor-pointer opacity-60 hover:opacity-100">
+                  <button class="flex-shrink-0 w-5 h-5 rounded-full border border-neutral-700 bg-black/50 flex items-center justify-center text-transparent ml-1">
+                    <iconify-icon icon="solar:check-read-linear" class="text-[10px]"></iconify-icon>
+                  </button>
+                  <div class="w-24 h-14 bg-[#111] rounded-md overflow-hidden relative flex-shrink-0 border border-white/5">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                      <iconify-icon icon="solar:lock-linear" class="text-neutral-500 text-sm"></iconify-icon>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=200&amp;q=80" class="w-full h-full object-cover opacity-30 grayscale" alt="thumbnail">
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <h4 class="text-sm font-medium text-neutral-400 truncate">React Context API Deep Dive</h4>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-[11px] text-neutral-500 truncate">Traversy Media</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Module 3: Locked -->
+            <div class="border border-white/5 rounded-xl bg-black/20 overflow-hidden opacity-50">
+              <div class="p-4 sm:p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-medium text-neutral-400 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-white/5 text-neutral-500 flex items-center justify-center text-xs border border-white/10">3</span>
+                    Module 3: Routing &amp; Performance
+                  </h3>
+                  <p class="text-xs text-neutral-600 mt-1 ml-8">React Router v6, Lazy loading, and Memoization.</p>
+                </div>
+                <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" class="text-neutral-500"></iconify-icon>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (Saved Paths & Activity) -->
+      <div class="xl:col-span-4 space-y-6">
+        
+        <!-- Saved Paths Widget -->
+        <div class="glass-panel rounded-2xl p-5 border border-white/10">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+              <iconify-icon icon="solar:bookmark-linear" class="text-neutral-400"></iconify-icon>
+              Saved Learning Paths
+            </h2>
+            <a href="#" class="text-[11px] font-medium text-neutral-400 hover:text-white transition-colors">View All</a>
+          </div>
+
+          <div class="space-y-3">
+            <!-- Saved Path Card 1 -->
+            <div class="group bg-black/40 border border-white/5 rounded-xl p-4 hover:border-white/10 hover:bg-white/[0.02] transition-colors cursor-pointer block">
+              <h3 class="text-sm font-medium text-white mb-1 group-hover:text-green-400 transition-colors line-clamp-1">Python for Data Science</h3>
+              <p class="text-[11px] text-neutral-500 mb-4 flex items-center gap-2">
+                <span>12 Modules</span>
+                <span class="w-1 h-1 rounded-full bg-neutral-700"></span>
+                <span>45h 20m</span>
+              </p>
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-end text-[10px] font-medium text-neutral-400 uppercase tracking-wider">
+                  <span>Progress</span>
+                  <span class="text-white">60%</span>
+                </div>
+                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div class="h-full bg-white w-[60%] rounded-full group-hover:bg-green-400 transition-colors"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Saved Path Card 2 -->
+            <div class="group bg-black/40 border border-white/5 rounded-xl p-4 hover:border-white/10 hover:bg-white/[0.02] transition-colors cursor-pointer block">
+              <h3 class="text-sm font-medium text-white mb-1 group-hover:text-green-400 transition-colors line-clamp-1">Cinematic Video Editing Theory</h3>
+              <p class="text-[11px] text-neutral-500 mb-4 flex items-center gap-2">
+                <span>5 Modules</span>
+                <span class="w-1 h-1 rounded-full bg-neutral-700"></span>
+                <span>12h 45m</span>
+              </p>
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-end text-[10px] font-medium text-neutral-400 uppercase tracking-wider">
+                  <span>Progress</span>
+                  <span class="text-white">15%</span>
+                </div>
+                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div class="h-full bg-white w-[15%] rounded-full group-hover:bg-green-400 transition-colors"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Saved Path Card 3 -->
+            <div class="group bg-black/40 border border-white/5 rounded-xl p-4 hover:border-white/10 hover:bg-white/[0.02] transition-colors cursor-pointer block opacity-70 hover:opacity-100">
+              <h3 class="text-sm font-medium text-white mb-1 group-hover:text-green-400 transition-colors line-clamp-1">Spanish A1 to B2 Fluent</h3>
+              <p class="text-[11px] text-neutral-500 mb-4 flex items-center gap-2">
+                <span>24 Modules</span>
+                <span class="w-1 h-1 rounded-full bg-neutral-700"></span>
+                <span>120h 00m</span>
+              </p>
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-end text-[10px] font-medium text-neutral-400 uppercase tracking-wider">
+                  <span>Progress</span>
+                  <span class="text-white">0%</span>
+                </div>
+                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div class="h-full bg-white w-[0%] rounded-full group-hover:bg-green-400 transition-colors"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Activity Mini-Widget -->
+        <div class="glass-panel rounded-2xl p-5 border border-white/10">
+          <h2 class="text-sm font-semibold text-white tracking-tight mb-4 flex items-center gap-2">
+            <iconify-icon icon="solar:chart-square-linear" class="text-neutral-400"></iconify-icon>
+            Weekly Goal
+          </h2>
+          <div class="flex items-center gap-4">
+            <div class="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path class="text-white/10" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                <path class="text-green-400" stroke-dasharray="75, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+              </svg>
+              <span class="absolute text-xs font-semibold text-white">3/4h</span>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white mb-0.5">Almost there!</p>
+              <p class="text-xs text-neutral-400">Watch 1 more hour to hit your weekly learning goal.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  
+</body></html>
